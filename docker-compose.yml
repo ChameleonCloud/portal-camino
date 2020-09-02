@@ -1,0 +1,42 @@
+version: "3.5"
+services:
+  portal:
+    image: ${PORTAL_TAG}
+    volumes:
+      - ./conf/uwsgi/uwsgi.ini:/project/uwsgi.ini
+      - ./conf/portal/static:/var/www/chameleoncloud.org/static/
+    env_file:
+      - ./conf/portal/.chameleon_env
+    command: ["uwsgi", "--ini", "uwsgi.ini"]
+    container_name: portal
+    restart: always
+
+  nginx:
+    image: nginx
+    volumes:
+      # - ./conf/nginx/certs/certs0:/etc/ssl/chameleoncloud.org
+      - ./conf/nginx/certs/certs1/bundle.crt:/etc/ssl/certs/portal.cer
+      - ./conf/nginx/certs/certs1/site.key:/etc/ssl/private/portal.key
+      - ./conf/nginx/certs/certs2/bundle.crt:/etc/ssl/api.chameleoncloud.org/bundle.crt
+      - ./conf/nginx/certs/certs2/site.key:/etc/ssl/api.chameleoncloud.org/site.key
+      # - /etc/ssl/dhparams.pem:/etc/ssl/dhparams.pem
+      - ./conf/nginx/api.chameleoncloud.org.server.conf:/etc/nginx/conf.d/api.chameleoncloud.org.conf
+      - ./conf/portal/static:/var/www/chameleoncloud.org/static/
+      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+      - 443:443
+    container_name: nginx
+    restart: always
+
+  referenceapi:
+    image: referenceapi
+    ports:
+      - 8000:8000
+    container_name: referenceapi
+
+  memcached:
+    image: memcached:latest
+    command: ["-m", "512m"]
+    container_name: memcached
+    restart: always
