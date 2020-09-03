@@ -15,7 +15,7 @@ services:
     image: nginx
     volumes:
       - /etc/ssl/certs/chameleon.bundle.crt:/etc/ssl/certs/portal.cer
-      - ./conf/nginx/certs/dev.chameleon.tacc.utexas.edu.key:/etc/ssl/private/portal.key
+      - /etc/ssl/certs/dev.chameleon.tacc.utexas.edu.key:/etc/ssl/private/portal.key
       - /etc/ssl/dhparams.pem:/etc/ssl/dhparams.pem
       - ./conf/portal/static:/var/www/chameleoncloud.org/static/
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
