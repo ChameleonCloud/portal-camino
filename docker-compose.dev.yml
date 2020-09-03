@@ -10,6 +10,8 @@ services:
     command: ["uwsgi", "--ini", "uwsgi.ini"]
     container_name: portal
     restart: always
+    networks:
+      - app
 
   nginx:
     image: nginx
@@ -24,15 +26,24 @@ services:
       - 443:443
     container_name: nginx
     restart: always
+    networks:
+      - app
 
   referenceapi:
     image: referenceapi
     ports:
       - 8000:8000
     container_name: referenceapi
+    networks:
+      - app
 
   memcached:
     image: memcached:latest
     command: ["-m", "512m"]
     container_name: memcached
     restart: always
+
+networks:
+  app:
+    external: true
+    name: portal
