@@ -12,7 +12,6 @@ services:
     restart: always
     networks:
       - app
-
   nginx:
     image: nginx
     volumes:
@@ -28,21 +27,18 @@ services:
     restart: always
     networks:
       - app
-
   referenceapi:
-    image: referenceapi
+    image: ${REFERENCEAPI_TAG}
     ports:
       - 8000:8000
     container_name: referenceapi
     networks:
       - app
-
   memcached:
     image: memcached:latest
     command: ["-m", "512m"]
     container_name: memcached
     restart: always
-
 networks:
   app:
     external: true
