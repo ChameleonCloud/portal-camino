@@ -1,7 +1,7 @@
 #!make
 CHAMELEON_ENV ?= ./conf/portal/.chameleon_env
-include $(CHAMELEON_ENV)
 COMPOSE_ENV ?= ./conf/camino/$(shell cat .env)
+include $(CHAMELEON_ENV) $(COMPOSE_ENV)
 DOCKER_COMPOSE :=  docker-compose -f $(COMPOSE_FILE) --env-file=$(COMPOSE_ENV)
 DB_BACKUP_FILE := /var/www/chameleon/dbbackup/chameleon-$(shell date --iso=seconds).mysql
 
