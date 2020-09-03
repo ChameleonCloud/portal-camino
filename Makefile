@@ -1,7 +1,9 @@
 #!make
-ENV_FILE ?= ./conf/camino/$(shell cat .env)
-include $(ENV_FILE)
-DOCKER_COMPOSE :=  docker-compose -f $(COMPOSE_FILE) --env-file=$(ENV_FILE)
+CHAMELEON_ENV ?= ./conf/portal/.chameleon_env
+include $(CHAMELEON_ENV)
+COMPOSE_ENV ?= ./conf/camino/$(shell cat .env)
+DOCKER_COMPOSE :=  docker-compose -f $(COMPOSE_FILE) --env-file=$(COMPOSE_ENV)
+DB_BACKUP_FILE := /var/www/chameleon/dbbackup/chameleon-$(shell date --iso=seconds).mysql
 
 .PHONY: stop
 stop:
@@ -42,3 +44,7 @@ migrate:
 .PHONY: collectstatic
 collectstatic:
 	$(DOCKER_COMPOSE) exec $(service) python manage.py collectstatic --noinput
+
+.PHONY: dbbackup
+dbbackup:
+	mysqldump -u $(DB_USER) -h $(DB_HOST) $(DB_NAME) --password="$(DB_PASSWORD)" > $(DB_BACKUP_FILE)
