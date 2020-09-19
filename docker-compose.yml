@@ -10,6 +10,8 @@ services:
     command: ["uwsgi", "--ini", "uwsgi.ini"]
     container_name: portal
     restart: always
+    depends_on:
+      - nginx
   nginx:
     image: nginx
     volumes:
@@ -47,7 +49,7 @@ services:
     ports:
       - '127.0.0.1:6379:6379'
   celery:
-    image: ${PORTAL_TAG}
+    image: docker.chameleoncloud.org/portal:c022a4f
     command: celery -A chameleon worker -l info --concurrency=1 -B
     env_file:
       - ./conf/portal/.chameleon_env
