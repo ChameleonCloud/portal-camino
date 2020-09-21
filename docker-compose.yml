@@ -12,6 +12,8 @@ services:
     restart: always
     depends_on:
       - nginx
+    networks:
+      - app
   nginx:
     image: nginx
     volumes:
@@ -28,14 +30,16 @@ services:
       - 443:443
     container_name: nginx
     restart: always
+    networks:
+      - app
   referenceapi:
     image: ${REFERENCEAPI_TAG}
-    ports:
-      - 8000:8000
     container_name: referenceapi
     restart: always
     depends_on:
       - nginx
+    networks:
+      - app
   memcached:
     image: memcached:latest
     command: ["-m", "512m"]
@@ -53,3 +57,7 @@ services:
       - ./conf/portal/.chameleon_env
     depends_on:
       - redis
+networks:
+  app:
+    external: true
+    name: chameleon_default

@@ -29,8 +29,6 @@ services:
       - app
   referenceapi:
     image: ${REFERENCEAPI_TAG}
-    ports:
-      - 8000:8000
     container_name: referenceapi
     networks:
       - app
