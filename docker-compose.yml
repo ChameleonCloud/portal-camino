@@ -24,7 +24,7 @@ services:
       - /etc/ssl/dhparams.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/var/www/chameleoncloud.org/static/
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./conf/nginx/api.chameleoncloud.org.conf:/etc/nginx/conf.d/api.chameleoncloud.server.conf
+      - ./conf/nginx/conf.d:/etc/nginx/conf.d
     ports:
       - 80:80
       - 443:443
