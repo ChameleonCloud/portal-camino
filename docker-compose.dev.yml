@@ -37,6 +37,8 @@ services:
     command: ["-m", "512m"]
     container_name: memcached
     restart: always
+    networks:
+      - app
 networks:
   app:
     external: true
