@@ -55,7 +55,7 @@ services:
     networks:
       - app
   celery:
-    image: docker.chameleoncloud.org/portal:c022a4f
+    image: ${PORTAL_TAG}
     command: celery -A chameleon worker -l info --concurrency=1 -B
     env_file:
       - ./conf/portal/.chameleon_env

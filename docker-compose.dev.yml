@@ -39,6 +39,20 @@ services:
     restart: always
     networks:
       - app
+  redis:
+    image: "redis:alpine"
+    restart: always
+    networks:
+      - app
+  celery:
+    image: ${PORTAL_TAG}
+    command: celery -A chameleon worker -l info --concurrency=1 -B
+    env_file:
+      - ./conf/portal/.chameleon_env
+    depends_on:
+      - redis
+    networks:
+      - app
 networks:
   app:
     external: true
