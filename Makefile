@@ -39,7 +39,9 @@ deploy:
 
 .PHONY: migrate
 migrate:
-	$(DOCKER_COMPOSE) exec $(service) python manage.py migrate
+	docker run --rm -it --net=$(DOCKER_NETWORK) \
+		--env-file=conf/portal/.chameleon_env $(PORTAL_TAG) \
+		python manage.py migrate
 
 .PHONY: collectstatic
 collectstatic:

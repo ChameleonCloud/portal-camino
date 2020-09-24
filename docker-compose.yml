@@ -60,4 +60,4 @@ services:
 networks:
   app:
     external: true
-    name: chameleon_default
+    name: ${DOCKER_NETWORK}
