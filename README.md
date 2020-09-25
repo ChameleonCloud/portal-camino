@@ -16,7 +16,7 @@ Clone this repo to `/opt/`
 
 At the root of the cloned project create the env file `.env` and add the name of the environment file to be used to manage deployments. The env files are named according the deployment environment they manage, like `dev.env, prod.env`.
 
-Ex. To manage and deploy dev, use the filename `dev.env`, this file will be passed to docker-compose with [`--env-file=./conf/camino/dev.env`](https://docs.docker.com/compose/environment-variables/)
+Ex. To manage and deploy dev, use the filename `dev.env`, this file will be passed to docker-compose with [`--env-file=./conf/camino/prod.env`](https://docs.docker.com/compose/environment-variables/)
 
 ### Deploy a new portal image in dev or prod:
 
