@@ -55,8 +55,8 @@ restart the portal: `make restart service=portal`
 pull images for all services: `make pull`
 
 pull images for portal: `make pull service=portal`
-
-Full list of commands:
+<br /><br />
+##### Command List
 
 Stops all running containers/services, optional `service={service}`  
 ``` 
