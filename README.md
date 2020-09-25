@@ -58,39 +58,61 @@ pull images for portal: `make pull service=portal`
 
 Full list of commands:
 
-Stops all running containers/services, optional `service={service}`
-`make stop`
+Stops all running containers/services, optional `service={service}`  
+``` 
+  make stop
+```
 
-Starts all containers/services, optional `service={service}`
-This command will fail if container hasn't been created for a service
-`make start`
+Starts all containers/services, optional `service={service}`  
+This command will fail if container hasn't been created for a service  
+```
+  make start
+ ```
 
-Stops and deletes all containers managed by the compose file, optional `service={service}`
-`make down`
+Stops and deletes all containers managed by the compose file, optional `service={service}`  
+```
+  make down
+ ```
 
-Starts services, creates new container if none exists, optional `service={service}`
-`make up`
+Starts services, creates new container if none exists, optional `service={service}`  
+```
+  make up
+```
 
-Pull new service images if available, optional `service={service}`
-`make pull`
+Pull new service images if available, optional `service={service}`  
+```
+  make pull
+```
 
-Restarts all services, creating new containers as needed, optional `service={service}`
-`make restart`
+Restarts all services, creating new containers as needed, optional `service={service}`  
+```
+  make restart
+```
 
-Pulls new images and restarts services, creating new containers for updated images, optional `service={service}`
-`make deploy`
+Pulls new images and restarts services, creating new containers for updated images, optional `service={service}`  
+```
+  make deploy
+```
 
-Runs django migrations in portal
-`make migrate service=portal`
+Runs django migrations in portal  
+```
+  make migrate service=portal
+```
 
-Runs django's collectstatic in portal
-`make collectstatic service=portal`
+Runs django's collectstatic in portal  
+```
+  make collectstatic service=portal
+```
 
-Makes backup of current database and places it in, `/var/www/chameleon/dbbackup/`
-`make dbbackup`
-
-
-
-
-
+Makes backup of current database and places it in, `/var/www/chameleon/dbbackup/`  
+```
+  make dbbackup
+```
+  
+  
+  
+  
+  
+  
+  
 _por necesidad o aventura, todo descubrimiento nace con el inicio de un viaje sin fin, el camino hacia la frontera_
