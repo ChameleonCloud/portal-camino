@@ -41,10 +41,9 @@ To update production certificates for chameleoncloud.org, the docker-compose.yml
       - /etc/ssl/certs/www.chameleoncloud.org.key:/etc/ssl/private/portal.key
 ```
 
-After backing up the existing contents, the file `/etc/ssl/certs/chameleon.bundle.crt` should be updated with the new portal cert and any intermmediate certificates
-After backing up the existing contents, the file `/etc/ssl/certs/www.chameleoncloud.org.key` should be updated with the new key
-
-After updating the certificate and key, restart nginx with `make restart service=nginx`
+- Update `/etc/ssl/certs/chameleon.bundle.crt` with the new portal cert and any intermmediate certificates  
+- Update `/etc/ssl/certs/www.chameleoncloud.org.key` with the new key
+- After updating the certificate and key, restart nginx with `make restart service=nginx`
 
 ### Using `make` to manage portal services
 
@@ -55,7 +54,7 @@ restart the portal: `make restart service=portal`
 pull images for all services: `make pull`
 
 pull images for portal: `make pull service=portal`
-<br /><br />
+<br />
 ##### Command List
 
 Stops all running containers/services, optional `service={service}`  
