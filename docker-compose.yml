@@ -5,6 +5,7 @@ services:
     volumes:
       - ./conf/uwsgi/uwsgi.ini:/project/uwsgi.ini
       - /var/www/chameleon/static:/var/www/chameleoncloud.org/static/
+      - /var/www/chameleon/media:/project/media
     env_file:
       - ./conf/portal/.chameleon_env
     command: ["uwsgi", "--ini", "uwsgi.ini"]
@@ -22,7 +23,8 @@ services:
       - /etc/ssl/certs/api.chameleon.bundle.crt:/etc/ssl/certs/api.portal.cer
       - /etc/ssl/certs/api.chameleoncloud.org.key:/etc/ssl/api.chameleoncloud.org.key
       - /etc/ssl/dhparams.pem:/etc/ssl/dhparam.pem
-      - /var/www/chameleon/static:/var/www/chameleoncloud.org/static/
+      - /var/www/chameleon/static:/var/www/chameleoncloud.org/static
+      - /var/www/chameleon/media:/var/www/chameleoncloud.org/media
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/nginx/conf.d:/etc/nginx/conf.d
     ports:
