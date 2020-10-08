@@ -9,9 +9,9 @@ DB_BACKUP_FILE = $(DB_BACKUP_PATH)/chameleon-$(shell date --iso=seconds).mysql
 .DEFAULT_GOAL := help
 .PHONY: help
 help:
-	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) \
-		| sort \
-		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+	@echo $(MAKEFILE_LIST)
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(word 1,$(MAKEFILE_LIST)) \
+		| awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-24s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: stop
 stop: ## Stop the service(s) specified by `service` var (default all).
