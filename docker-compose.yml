@@ -11,6 +11,8 @@ services:
     command: ["uwsgi", "--ini", "uwsgi.ini"]
     container_name: portal
     restart: always
+    logging:
+      driver: journald
     depends_on:
       - nginx
     networks:
@@ -61,6 +63,8 @@ services:
     command: celery -A chameleon worker -l INFO --concurrency=1 -B
     env_file:
       - ./conf/portal/.chameleon_env
+    logging:
+      driver: journald
     depends_on:
       - redis
     networks:
