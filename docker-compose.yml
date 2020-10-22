@@ -13,8 +13,6 @@ services:
     restart: always
     logging:
       driver: journald
-    depends_on:
-      - nginx
     networks:
       - app
   nginx:
