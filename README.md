@@ -25,7 +25,7 @@ Ex. To manage and deploy dev, use the filename `dev.env`, this file will be pass
 2. SSH to host and switch to portal account, `su - portal`
 3. Navigate to camino repo `cd /opt/portal-camino`
 4. Update repo with latest changes `git pull`
-5. Deploy changes using make: `make portal-deploy`. This pulls the new image and restarts the service, then additionally runs DB migrations and re-collects static assets.
+5. Deploy changes using make: `make deploy service=portal`. This pulls the new image and restarts the service, then additionally runs DB migrations and re-collects static assets.
 
 To back-up the database at any point, run `make dbbackup`, this creates a dbdump of the curren database and stores it in `DB_BACKUP_PATH`, defaulting to `/var/www/chameleon/dbbackup/`.
 
