@@ -48,6 +48,13 @@ portal-deploy: ## Performs a full portal deploy, including the celery service. I
 	$(DOCKER_COMPOSE) up -d portal celery
 	# TODO: not sure why this is really necessary.
 	$(DOCKER_COMPOSE) restart nginx
+
+	# Address "WARNING: Service "portal" is using volume "/media" from the previous container. 
+	# Host mapping "/var/www/chameleon/media" has no effect. 
+	# Remove the existing containers (with `docker-compose rm portal`) to use the host volume mapping."
+	$(DOCKER_COMPOSE) rm --stop portal
+	
+	#Migrations appear because of cached static files
 	$(DOCKER_COMPOSE) exec portal python manage.py migrate
 	$(DOCKER_COMPOSE) exec portal python manage.py collectstatic --noinput
 
