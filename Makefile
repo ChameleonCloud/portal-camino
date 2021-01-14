@@ -43,7 +43,8 @@ deploy: ## Pull images and recreate the service(s) specified by `service` var (d
 	$(DOCKER_COMPOSE) up -d $(service)
 
 .PHONY: portal-deploy
-portal-deploy: ## Performs a full portal deploy, including the celery service. Includes DB migrations and static file collection post-deploy.
+## Performs a full portal deploy, including the celery service. Includes DB migrations and static file collection post-deploy.
+portal-deploy: check-migrations
 	$(DOCKER_COMPOSE) pull portal celery
 	$(DOCKER_COMPOSE) up -d portal celery
 	# TODO: not sure why this is really necessary.
@@ -61,6 +62,10 @@ portal-deploy: ## Performs a full portal deploy, including the celery service. I
 .PHONY: migrate
 portal-migrate: ## Run DB migrations on the portal service.
 	$(DOCKER_COMPOSE) exec portal python manage.py migrate
+
+.PHONY: check-migrations
+check-migrations: ## Run DB migrations on the portal service.
+	$(DOCKER_COMPOSE) exec portal python manage.py makemigrations --check
 
 .PHONY: collectstatic
 portal-collectstatic: ## Collect static assets for the portal service.
