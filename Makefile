@@ -62,6 +62,7 @@ portal-deploy: check-migrations
 
 .PHONY: migrate
 portal-migrate: ## Run DB migrations on the portal service.
+	$(DOCKER_COMPOSE) up -d portal
 	$(DOCKER_COMPOSE) exec portal python manage.py migrate
 
 .PHONY: check-migrations
