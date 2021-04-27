@@ -18,10 +18,10 @@ services:
   nginx:
     image: nginx
     volumes:
-      - /etc/ssl/certs/dev.chameleon.bundle.crt:/etc/ssl/certs/portal.cer
-      - /etc/ssl/certs/dev.chameleon.tacc.utexas.edu.key:/etc/ssl/private/portal.key
-      - /etc/ssl/certs/dev.chameleon.bundle.crt:/etc/ssl/certs/api.portal.cer
-      - /etc/ssl/certs/dev.chameleon.tacc.utexas.edu.key:/etc/ssl/api.chameleoncloud.org.key
+      - /etc/letsencrypt/live/dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/portal.cer
+      - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
+      - /etc/letsencrypt/live/api.dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/api.portal.cer
+      - /etc/letsencrypt/live/api.dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
       - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
