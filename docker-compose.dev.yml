@@ -20,13 +20,13 @@ services:
     volumes:
       - /etc/letsencrypt/live/dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
-      - /etc/letsencrypt/live/api.dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/api.portal.cer
-      - /etc/letsencrypt/live/api.dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
+      # - /etc/letsencrypt/live/api.dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/api.portal.cer
+      # - /etc/letsencrypt/live/api.dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
       - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./conf/nginx/conf.d:/etc/nginx/conf.d
+      - ./conf/nginx/conf.d/includes:/etc/nginx/conf.d/includes
     ports:
       - 80:80
       - 443:443
