@@ -74,6 +74,8 @@ services:
     command: python balance_service/app.py
     volumes:
       - ./conf/allocations/service.conf:/etc/allocations/service.conf
+    networks:
+      - app
   allocations_db:
     image: "redis:alpine"
     container_name: allocations_db
@@ -84,6 +86,9 @@ services:
     command: ["redis-server", "/etc/redis/redis.conf"]
     networks:
       - app
+
+volumes:
+  allocations_db_data:
 
 networks:
   app:
