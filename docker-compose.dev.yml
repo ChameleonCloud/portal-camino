@@ -18,12 +18,12 @@ services:
   nginx:
     image: nginx
     volumes:
-      - /etc/letsencrypt/live/dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/portal.cer
+      - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
       # TODO(jason): we don't yet have DNS records or certs for api.dev.chameleoncloud.org,
       # and the nginx config also assumes a hostname api.chameleoncloud.org, which will
       # not work for dev. For now, just re-use the existing certs so it least nginx starts up.
-      - /etc/letsencrypt/live/dev.chameleoncloud.org/cert.pem:/etc/ssl/certs/api.portal.cer
+      - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/api.portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
       - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
