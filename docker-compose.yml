@@ -18,10 +18,10 @@ services:
   nginx:
     image: nginx
     volumes:
-      - /etc/ssl/certs/chameleon.bundle.crt:/etc/ssl/certs/portal.cer
-      - /etc/ssl/certs/www.chameleoncloud.org.key:/etc/ssl/private/portal.key
-      - /etc/ssl/certs/api.chameleon.bundle.crt:/etc/ssl/certs/api.portal.cer
-      - /etc/ssl/certs/api.chameleoncloud.org.key:/etc/ssl/api.chameleoncloud.org.key
+      - /etc/letsencrypt/live/chameleoncloud.org/fullchain.pem:/etc/ssl/certs/portal.cer
+      - /etc/letsencrypt/live/chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
+      - /etc/letsencrypt/live/api.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/api.portal.cer
+      - /etc/letsencrypt/live/api.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
       - /etc/ssl/dhparams.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
