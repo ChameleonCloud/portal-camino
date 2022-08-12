@@ -68,24 +68,6 @@ services:
       - redis
     networks:
       - app
-  allocations_api:
-    image: ${ALLOCATIONS_API_TAG}
-    container_name: allocations_api
-    command: python balance_service/app.py
-    volumes:
-      - ./conf/allocations/service.conf:/etc/allocations/service.conf
-    networks:
-      - app
-  allocations_db:
-    image: "redis:alpine"
-    container_name: allocations_db
-    restart: always
-    volumes:
-      - allocations_db_data:/data
-      - ./conf/allocations/redis:/etc/redis
-    command: ["redis-server", "/etc/redis/redis.conf"]
-    networks:
-      - app
 
 volumes:
   allocations_db_data:
