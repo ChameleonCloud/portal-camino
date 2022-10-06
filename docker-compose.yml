@@ -27,7 +27,6 @@ services:
       - /var/www/chameleon/media:/media
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/nginx/conf.d:/etc/nginx/conf.d
-      - ./conf/allocations/nginx/portal_allocations_api.conf:/etc/nginx/conf.d/includes/portal_allocations_api.conf
     ports:
       - 80:80
       - 443:443
@@ -68,9 +67,6 @@ services:
       - redis
     networks:
       - app
-
-volumes:
-  allocations_db_data:
 
 networks:
   app:
