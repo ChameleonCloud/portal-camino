@@ -25,6 +25,7 @@ services:
       - /etc/ssl/dhparams.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
+      - /var/www/certbot:/var/www/certbot
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/nginx/conf.d:/etc/nginx/conf.d
     ports:
