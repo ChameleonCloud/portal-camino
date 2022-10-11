@@ -33,10 +33,6 @@ up: ## Bring up the service(s) specified by `service` var (default all).
 pull: ## Pull images for the service(s) specified by `service` var (default all).
 	$(DOCKER_COMPOSE) pull $(service)
 
-.PHONY: build
-build: ## Build images for the service(s) specified by `service` var (default all).
-	$(DOCKER_COMPOSE) build $(service)
-
 .PHONY: restart
 restart: ## Restart the service(s) specified by `service` var (default all).
 	$(DOCKER_COMPOSE) restart $(service)
@@ -44,7 +40,6 @@ restart: ## Restart the service(s) specified by `service` var (default all).
 .PHONY: deploy
 deploy: ## Pull images and recreate the service(s) specified by `service` var (default all).
 	$(DOCKER_COMPOSE) pull $(service)
-	$(DOCKER_COMPOSE) build $(service)
 	$(DOCKER_COMPOSE) up -d $(service)
 
 .PHONY: portal-deploy
