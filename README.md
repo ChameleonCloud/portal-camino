@@ -31,6 +31,8 @@ To back-up the database at any point, run `make dbbackup`, this creates a dbdump
 
 ### Update SSL Certificates and Keys
 
+#### Manual updating
+
 To update certificates and keys, place the certificate and key in the location indicated in the docker-compose file matching the environment where the cert will be updated
 To update production certificates for chameleoncloud.org, the docker-compose.yml shows the files that should be updated below:
 
@@ -45,6 +47,21 @@ To update production certificates for chameleoncloud.org, the docker-compose.yml
 - Update `/etc/ssl/certs/chameleon.bundle.crt` with the new portal cert and any intermmediate certificates
 - Update `/etc/ssl/certs/www.chameleoncloud.org.key` with the new key
 - After updating the certificate and key, restart nginx with `make restart service=nginx`
+
+#### Automatic updating
+
+`nginx` is configured to serve responses to webroot challenges from Let's Encrypt. 
+If you have certbot running on the host machine, have it execute a webroot challenge:
+```shell
+$ certbot renew --webroot --webroot-path /var/www/certbot
+```
+
+Once the cert is renewed, `nginx` will need to reload its configuration:
+```shell
+$ docker exec -it nginx nginx -s reload
+```
+To automate this, put a script which executes this command in certbot's renewal hooks 
+in `/etc/letsencrypt/renewal-hooks/post/`.
 
 ### Using `make` to manage individual services
 
