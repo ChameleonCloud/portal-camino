@@ -15,6 +15,18 @@ services:
       driver: journald
     networks:
       - app
+  mariadb:
+    image: mariadb:${DB_TAG}
+    volumes: 
+      - /var/lib/mysql:/var/lib/mysql
+    env_file: 
+      - ./conf/portal/.chameleon_env
+    container_name: mariadb
+    restart: always
+    logging:
+      driver: journald
+    networks: 
+      - app
   nginx:
     image: nginx
     volumes:
