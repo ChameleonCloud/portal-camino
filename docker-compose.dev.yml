@@ -55,12 +55,6 @@ services:
     restart: always
     networks:
       - app
-  redis:
-    image: "redis:alpine"
-    restart: always
-    container_name: redis
-    networks:
-      - app
   celery:
     image: ${PORTAL_TAG}
     container_name: celery
