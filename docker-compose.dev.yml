@@ -25,6 +25,8 @@ services:
     restart: always
     logging:
       driver: journald
+    ports:
+      - "3306:3006"
     networks: 
       - app
   nginx:
@@ -37,7 +39,6 @@ services:
       # not work for dev. For now, just re-use the existing certs so it least nginx starts up.
       - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/api.portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
-      - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
       - /var/www/certbot:/var/www/certbot
