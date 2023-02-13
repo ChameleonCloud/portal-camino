@@ -26,7 +26,7 @@ services:
     logging:
       driver: journald
     ports:
-      - "3306:3006"
+      - "3306:3306"
     networks: 
       - app
   nginx:
@@ -34,9 +34,7 @@ services:
     volumes:
       - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
-      # TODO(jason): we don't yet have DNS records or certs for api.dev.chameleoncloud.org,
-      # and the nginx config also assumes a hostname api.chameleoncloud.org, which will
-      # not work for dev. For now, just re-use the existing certs so it least nginx starts up.
+      - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/api.portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
       - /var/www/chameleon/static:/static
@@ -76,8 +74,6 @@ services:
       - ./conf/portal/.chameleon_env
     logging:
       driver: journald
-    depends_on:
-      - redis
     networks:
       - app
 
