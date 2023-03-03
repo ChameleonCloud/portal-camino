@@ -78,6 +78,8 @@ services:
       - ./conf/portal/.chameleon_env
     logging:
       driver: journald
+    depends_on:
+      - redis
     networks:
       - app
 
