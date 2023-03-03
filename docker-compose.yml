@@ -29,6 +29,12 @@ services:
       - "3306:3306"
     networks:
       - app
+  redis:
+    image: "redis:alpine"
+    restart: always
+    container_name: redis
+    networks:
+      - app
   nginx:
     image: nginx
     volumes:
