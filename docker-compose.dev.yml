@@ -15,22 +15,34 @@ services:
       driver: journald
     networks:
       - app
+  mariadb:
+    image: mariadb:${DB_TAG}
+    volumes: 
+      - /var/lib/mysql:/var/lib/mysql
+    env_file: 
+      - ./conf/portal/.chameleon_env
+    container_name: mariadb
+    restart: always
+    logging:
+      driver: journald
+    ports:
+      - "3306:3306"
+    networks: 
+      - app
   nginx:
     image: nginx
     volumes:
       - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
-      # TODO(jason): we don't yet have DNS records or certs for api.dev.chameleoncloud.org,
-      # and the nginx config also assumes a hostname api.chameleoncloud.org, which will
-      # not work for dev. For now, just re-use the existing certs so it least nginx starts up.
+      - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /etc/letsencrypt/live/dev.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/api.portal.cer
       - /etc/letsencrypt/live/dev.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
-      - /etc/ssl/dhparam.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
       - /var/www/certbot:/var/www/certbot
       - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./conf/nginx/conf.d:/etc/nginx/conf.d
+    hostname: dev.chameleoncloud.org
     ports:
       - 80:80
       - 443:443
@@ -69,8 +81,6 @@ services:
       - ./conf/portal/.chameleon_env
     logging:
       driver: journald
-    depends_on:
-      - redis
     networks:
       - app
 

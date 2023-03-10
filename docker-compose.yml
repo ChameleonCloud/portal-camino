@@ -15,13 +15,31 @@ services:
       driver: journald
     networks:
       - app
+  mariadb:
+    image: mariadb:${DB_TAG}
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+    env_file:
+      - ./conf/portal/.chameleon_env
+    container_name: mariadb
+    restart: always
+    logging:
+      driver: journald
+    ports:
+      - "3306:3306"
+    networks:
+      - app
+  redis:
+    image: "redis:alpine"
+    restart: always
+    container_name: redis
+    networks:
+      - app
   nginx:
     image: nginx
     volumes:
       - /etc/letsencrypt/live/chameleoncloud.org/fullchain.pem:/etc/ssl/certs/portal.cer
       - /etc/letsencrypt/live/chameleoncloud.org/privkey.pem:/etc/ssl/private/portal.key
-      - /etc/letsencrypt/live/api.chameleoncloud.org/fullchain.pem:/etc/ssl/certs/api.portal.cer
-      - /etc/letsencrypt/live/api.chameleoncloud.org/privkey.pem:/etc/ssl/api.chameleoncloud.org.key
       - /etc/ssl/dhparams.pem:/etc/ssl/dhparam.pem
       - /var/www/chameleon/static:/static
       - /var/www/chameleon/media:/media
@@ -32,6 +50,7 @@ services:
       - 80:80
       - 443:443
     container_name: nginx
+    hostname: chameleoncloud.org
     restart: always
     networks:
       - app
@@ -43,17 +62,13 @@ services:
       - nginx
     networks:
       - app
+    volumes:
+      - ./conf/referenceapi/reference-repository:/var/db/g5k-api/reference-repository/:ro
   memcached:
     image: memcached:latest
     command: ["-m", "512m"]
     container_name: memcached
     restart: always
-    networks:
-      - app
-  redis:
-    image: "redis:alpine"
-    restart: always
-    container_name: redis
     networks:
       - app
   celery:
