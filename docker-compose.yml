@@ -50,6 +50,7 @@ services:
       - 80:80
       - 443:443
     container_name: nginx
+    hostname: chameleoncloud.org
     restart: always
     networks:
       - app
