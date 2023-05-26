@@ -19,6 +19,7 @@ services:
     image: mariadb:${DB_TAG}
     volumes:
       - /var/lib/mysql:/var/lib/mysql
+      - /var/lib/mysqldump:/var/lib/mysqldump
     env_file:
       - ./conf/portal/.chameleon_env
     container_name: mariadb
