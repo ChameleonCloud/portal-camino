@@ -84,6 +84,7 @@ services:
       - redis
     networks:
       - app
+    restart: always
 
 networks:
   app:
