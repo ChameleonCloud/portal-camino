@@ -65,6 +65,14 @@ services:
       - app
     volumes:
       - ./conf/referenceapi/reference-repository:/var/db/g5k-api/reference-repository/:ro
+  edgehwdiscovery:
+    image: ${EDGEHWDISCOVERY_TAG}
+    container_name: edgehwdiscovery
+    restart: always
+    env_file:
+      - ./conf/portal/.chameleon_env
+    networks:
+      - app
   memcached:
     image: memcached:latest
     command: ["-m", "512m"]
