@@ -42,6 +42,11 @@ deploy: ## Pull images and recreate the service(s) specified by `service` var (d
 	$(DOCKER_COMPOSE) pull $(service)
 	$(DOCKER_COMPOSE) up -d $(service)
 
+.PHONY: edgehwdiscovery-deploy
+edgehwdiscovery-deploy: ## Deploys edge-hw-discovery
+	$(DOCKER_COMPOSE) pull edgehwdiscovery
+	$(DOCKER_COMPOSE) up -d edgehwdiscovery
+
 .PHONY: portal-deploy
 portal-deploy: ## Performs a full portal deploy, including the celery service. Includes DB migrations and static file collection post-deploy.
 	$(DOCKER_COMPOSE) pull portal celery
