@@ -93,6 +93,10 @@ services:
     networks:
       - app
     restart: always
+  db_backup:
+    image: ghcr.io/chameleoncloud/db_backup:latest
+    env_file:
+      - ./conf/portal/.db_backup_env
 
 networks:
   app:
