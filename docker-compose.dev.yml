@@ -91,6 +91,11 @@ services:
       driver: journald
     networks:
       - app
+  db_backup:
+    image: ghcr.io/chameleoncloud/db_backup:latest
+    restart: always
+    env_file:
+      - ./conf/portal/.db_backup_env
 
 networks:
   app:
