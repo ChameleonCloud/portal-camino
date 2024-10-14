@@ -46,3 +46,4 @@ certs/
 .chameleon_env
 media/
 static/
+db_backup_env

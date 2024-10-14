@@ -96,6 +96,8 @@ services:
     restart: always
     env_file:
       - ./conf/portal/.db_backup_env
+    networks:
+      - app
 
 networks:
   app:
